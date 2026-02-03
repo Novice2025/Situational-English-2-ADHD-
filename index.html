@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXTATION: Lego Disruptive Chain Block Method™ - Story Mode 🚀</title>
+    <!-- Google Fonts for global typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!--
+        INLINE STYLES FOR INITIAL LOAD AND ROBUSTNESS:
+        These styles are included directly in the HTML to ensure the core "Batman Computer / Star Wars Console"
+        aesthetic is present immediately upon load, even before external CSS might fully parse or if you're
+        viewing the raw HTML without a build process. They carefully implement the color variables and design
+        specifics from the NEXTATION WEBSITE COLOUR SYSTEM AND USAGE.pdf.
+    -->
+    <style>
+        /* Global Colour Variables and Design Tokens */
+        :root {
+            --bg-main: #02030b;
+            --bg-gradient: radial-gradient(circle at top, #1c1f3b 0%, #050716 45%, #02030b 100%);
+            --card-bg: rgba(15, 18, 40, 0.92);
+            --card-soft-bg: rgba(18, 21, 50, 0.88);
+            --accent-cyan: #4ef2ff;
+            --accent-pink: #ff2f92;
+            --accent-green: #4dff9b;
+            --accent-yello: #ffe25f;
+            --accent-purple: #aa5dff;
+            --muted: rgba(255,255,255,0.65);
+            --border-glow: rgba(120,120,255,0.45);
+            --shadow-strong: 0 0 36px rgba(130,80,255,0.6);
+            --shadow-soft: 0 0 20px rgba(0,0,0,0.65);
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition-fast: 0.18s ease-out;
+            --transition-med: 0.28s ease-out;
+
+            --tab-normal-bg: radial-gradient(circle at top, rgba(255,255,255,0.09), rgba(7,10,28,0.96));
+            --tab-normal-border: rgba(130,140,200,0.4);
+            --tab-hover-border-strong: rgba(120,120,255,0.6);
+            --tab-hover-shadow: 0 0 20px rgba(120,120,255,0.35);
+            --tab-active-bg: radial-gradient(circle at top, rgba(255,255,255,0.15), rgba(21,13,51,0.98));
+            --tab-active-border: rgba(103,255,196,0.9);
+            --tab-active-shadow: 0 0 24px rgba(79,255,204,0.6);
+            --tab-completed-bg: radial-gradient(circle at top, rgba(77,255,155,0.1), rgba(10,30,15,0.96));
+            --tab-completed-border: rgba(77,255,155,0.6);
+            --tab-completed-shadow: 0 0 15px rgba(77,255,155,0.4);
+        }
+
+        /* Base styles for the entire page */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-main);
+            background-image: var(--bg-gradient);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header styling */
+        header {
+            background: linear-gradient(to right, rgba(15,18,40,0.95), rgba(6,8,26,0.95));
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-glow);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .teacher-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at center, var(--accent-cyan) 0%, var(--accent-purple) 60%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--accent-cyan), 0 0 40px var(--accent-purple);
+            animation: pulse-orb 3s infinite alternate ease-in-out;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-orb {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .logo-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8em;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(78,242,255,0.7);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            color: var(--muted);
+            margin: 0;
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* Main application container */
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Tab navigation styling */
+        .tab-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-strong);
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
+        }
+
+        .tab-item {
+            background: var(--tab-normal-bg);
+            border: 1px solid var(--tab-normal-border);
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1em;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all var(--transition-med);
+            text-align: center;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .tab-item:hover {
+            border-color: var(--tab-hover-border-strong);
+            box-shadow: var(--tab-hover-shadow);
+            color: var(--accent-cyan);
+        }
+
+        .tab-item.active {
+            background: var(--tab-active-bg);
+            border-color: var(--tab-active-border);
+            box-shadow: var(--tab-active-shadow);
+            color: var(--accent-green);
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .tab-item.completed {
+            background: var(--tab-completed-bg);
+            border-color: var(--tab-completed-border);
+            box-shadow: var(--tab-completed-shadow);
+            color: var(--accent-green);
+            position: relative;
+        }
+
+        .tab-item.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.7em;
+            color: var(--accent-green);
+            text-shadow: 0 0 5px rgba(77,255,155,0.7);
+        }
+
+        /* Lesson panel styling */
+        .lesson-panel {
+            background: linear-gradient(135deg, rgba(13,16,40,0.98), rgba(6,8,26,0.98));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-strong);
+            width: 100%;
+            max-width: 900px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .lesson-panel h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.8em;
+            margin-top: 0;
+            text-shadow: 0 0 10px rgba(78,242,255,0.5);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .lesson-panel h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4em;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px rgba(78,242,255,0.5);
+            border-bottom: 1px solid rgba(78,242,255,0.3);
+            padding-bottom: 8px;
+        }
+
+        .story-section, .exercise-section {
+            background: var(--card-soft-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .story-section p, .exercise-section p {
+            margin-bottom: 10px;
+        }
+
+        .expression-highlight {
+            color: var(--accent-yello);
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255,226,95,0.6);
+        }
+
+        .separator {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-glow), transparent);
+            margin: 30px 0;
+        }
+
+        .exercise-section .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .exercise-section .options label:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-purple);
+        }
+
+        .exercise-section .options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--accent-cyan); /* Style radio button itself */
+        }
+
+        .exercise-section button {
+            background: var(--accent-pink);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px 25px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(255,47,146,0.4);
+        }
+
+        .exercise-section button:hover {
+            background: #ff4da6;
+            box-shadow: 0 0 20px rgba(255,47,146,0.6);
+            transform: translateY(-2px);
+        }
+
+        .exercise-section .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--accent-green);
+            border-radius: var(--radius-md);
+            background: rgba(77,255,155,0.1);
+            color: var(--accent-green);
+            text-shadow: 0 0 5px rgba(77,255,155,0.3);
+        }
+
+        .exercise-section .options label.correct {
+            border-color: var(--accent-green);
+            background: rgba(77,255,155,0.2);
+            box-shadow: 0 0 10px rgba(77,255,155,0.4);
+        }
+
+        .exercise-section .options label.incorrect {
+            border-color: var(--accent-pink);
+            background: rgba(255,47,146,0.2);
+            box-shadow: 0 0 10px rgba(255,47,146,0.4);
+        }
+
+        /* Footer styling */
+        footer {
+            background: linear-gradient(to right, rgba(15,18,40,0.95), rgba(6,8,26,0.95));
+            padding: 20px 40px;
+            border-top: 1px solid var(--border-glow);
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer span {
+            color: var(--accent-pink);
+        }
+
+        .highlight-name {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .logo-title {
+                font-size: 1.5em;
+            }
+            .logo-subtitle {
+                font-size: 0.8em;
+            }
+            .teacher-orb {
+                width: 50px;
+                height: 50px;
+            }
+            .main-container {
+                padding: 20px;
+                gap: 20px;
+            }
+            .tab-navigation {
+                padding: 15px;
+                gap: 10px;
+            }
+            .tab-item {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .lesson-panel {
+                padding: 25px;
+                gap: 20px;
+            }
+            .lesson-panel h2 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+            .lesson-panel h3 {
+                font-size: 1.2em;
+            }
+            .story-section, .exercise-section {
+                padding: 15px;
+            }
+            .exercise-section button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-navigation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tab-item {
+                width: auto; /* Allow items to stretch */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <header>
+        <div class="header-content">
+            <div class="teacher-orb"></div>
+            <div>
+                <h1 class="logo-title">Daby's Lego Disruptive Chain Block Method™ 🧠</h1>
+                <p class="logo-subtitle">Thinking simulator for English mastery 🚀</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APPLICATION CONTAINER -->
+    <div class="main-container">
+        <!-- TAB NAVIGATION -->
+        <nav class="tab-navigation" id="tab-navigation">
+            <!-- Tabs will be dynamically inserted here by JavaScript -->
+        </nav>
+
+        <!-- LESSON PANEL - This is where content for each tab will be loaded -->
+        <section class="lesson-panel">
+            <h2 id="lesson-title">Welcome to NEXTATION! 🌟</h2>
+            <div id="lesson-content">
+                <p>🚨 Esta é a plataforma imersiva que vai mudar a sua forma de se comunicar em inglês. Aqui, você não vai apenas **aprender**; você vai **cair de cabeça** nas situações reais e **pensar como um nativo** antes mesmo de falar. 🗣️</p>
+                <p>🧠 Esqueça as aulas chatas de gramática! Focamos em te ensinar o **julgamento**, o **timing**, o **tom** e a **escolha** de palavras, exatamente como um nativo faz. Cada "tab" (situação) é um novo desafio da vida real. ✨</p>
+                <p>Clique em uma das situações acima para começar sua jornada e transformar seu inglês! 👇</p>
+                <p style="margin-top: 25px; font-weight: bold; color: var(--accent-green); text-shadow: 0 0 8px #4dff9b;">
+                    Let's make you think in English, not translate! 💡
+                </p>
+                <div class="separator"></div>
+                <p style="font-size: 0.9em; text-align: center; color: var(--muted);">
+                    *(The specific content for each lesson, like "Brazilian Thinking," "Native Thinking," and exercises, will load here dynamically when you click a tab. This is just a welcome placeholder.)*
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+        <p>&copy; 2026 Crafted with <span>&#10084;</span> by <span class="highlight-name">Daby</span>. All rights reserved.</p>
+        <p>Powered by the 🧠 Lego Disruptive Chain Block Method™.</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR DYNAMIC TAB CONTENT -->
+    <script>
+        const lessons = [
+            {
+                id: 'situation-1',
+                tabTitle: 'Situation 1 ⏰',
+                expression: 'You are still up?',
+                story_pt: `
+                    <h4>Noite Tarde na Cozinha 🌙</h4>
+                    <p>Era quase meia-noite e a luz da cozinha ainda estava acesa. João desceu para beber água e encontrou sua irmã, Maria, lendo um livro na mesa.</p>
+                    <p>Surpreso, ele perguntou: <span class="expression-highlight">"Você ainda está acordada?"</span></p>
+                    <p>Maria sorriu: "Sim, perdi a noção do tempo com este livro."</p>
+                `,
+                story_en: `
+                    <h4>Late Night in the Kitchen 🌙</h4>
+                    <p>It was almost midnight and the kitchen light was still on. João went downstairs to get some water and found his sister, Maria, reading a book at the table.</p>
+                    <p>Surprised, he asked: <span class="expression-highlight">"You are still up?"</span></p>
+                    <p>Maria smiled: "Yes, I lost track of time with this book."</p>
+                `,
+                english_situation: `
+                    <p>You see someone awake or active much later than you expected, or at an unusual hour. You want to express surprise or inquire about why they are not asleep. 😲</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você chega em casa às 3 da manhã e vê seu colega de quarto assistindo TV na sala.</p>
+                        <p>Como você perguntaria a ele se ele ainda está acordado?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Are you still awake?"', isCorrect: false },
+                        { text: 'B) "You are still up?"', isCorrect: true },
+                        { text: 'C) "Why are you not sleeping?"', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "You are still up?" é a forma mais comum e natural para expressar surpresa ao ver alguém acordado tarde da noite. "Are you still awake?" também é correto, mas "up" é mais informal e comum em conversas. 🗣️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-2',
+                tabTitle: 'Situation 2 🎂',
+                expression: 'I am turning 30',
+                story_pt: `
+                    <h4>O Aniversário de Ana 🎉</h4>
+                    <p>Ana estava conversando com sua melhor amiga, Bia, sobre os planos para o próximo mês. Bia perguntou sobre o aniversário de Ana.</p>
+                    <p>Ana, com um misto de empolgação e um pouco de apreensão, disse: <span class="expression-highlight">"Mês que vem, eu faço 30 anos!"</span></p>
+                    <p>Bia respondeu: "Que legal! Vamos fazer uma festa inesquecível!"</p>
+                `,
+                story_en: `
+                    <h4>Ana's Birthday 🎉</h4>
+                    <p>Ana was talking to her best friend, Bia, about plans for next month. Bia asked about Ana's birthday.</p>
+                    <p>Ana, with a mix of excitement and a little apprehension, said: <span class="expression-highlight">"Next month, I am turning 30!"</span></p>
+                    <p>Bia replied: "Awesome! We'll throw an unforgettable party!"</p>
+                `,
+                english_situation: `
+                    <p>You are talking about your upcoming birthday and want to state your age in a way that emphasizes the transition to a new decade or a significant age. 🥳</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo pergunta: "How old will you be next year?" Você fará 40 anos.</p>
+                        <p>Como você responderia?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I will be 40 next year."', isCorrect: false },
+                        { text: 'B) "I am turning 40 next year."', isCorrect: true },
+                        { text: 'C) "My age will be 40 next year."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I am turning 40" é a expressão mais natural e comum para indicar que você está atingindo uma nova idade, especialmente uma idade marcante. "I will be 40" também é correto, mas "turning" adiciona a ideia de transição. 🎂</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-3',
+                tabTitle: 'Situation 3 📚',
+                expression: 'It\'s a long story',
+                story_pt: `
+                    <h4>O Mistério do Projeto 🕵️‍♀️</h4>
+                    <p>No escritório, Carlos viu sua colega, Juliana, com uma pilha de papéis e uma expressão exausta. Ele perguntou o que havia acontecido com o projeto que parecia tão simples no início.</p>
+                    <p>Juliana suspirou e disse: <span class="expression-highlight">"É uma longa história."</span></p>
+                    <p>Carlos, entendendo o recado, apenas assentiu: "Imagino."</p>
+                `,
+                story_en: `
+                    <h4>The Project Mystery 🕵️‍♀️</h4>
+                    <p>At the office, Carlos saw his colleague, Juliana, with a pile of papers and an exhausted expression. He asked what had happened with the project that seemed so simple at first.</p>
+                    <p>Juliana sighed and said: <span class="expression-highlight">"It's a long story."</span></p>
+                    <p>Carlos, getting the hint, just nodded: "I can imagine."</p>
+                `,
+                english_situation: `
+                    <p>Someone asks you about a complex or involved situation, and you don't have time or energy to explain all the details, or you want to imply it's complicated without going into specifics. 🤫</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo pergunta por que você terminou seu relacionamento. Você não quer entrar em detalhes.</p>
+                        <p>Qual a melhor resposta?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I don\'t want to tell you."', isCorrect: false },
+                        { text: 'B) "It\'s a long story."', isCorrect: true },
+                        { text: 'C) "It is complicated."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "It's a long story" é a forma mais educada e comum de indicar que há muitos detalhes para explicar, sem ser rude ou evasivo. "It is complicated" também funciona, mas "long story" é mais idiomático para a situação. 📖</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-4',
+                tabTitle: 'Situation 4 🚧',
+                expression: 'I\'m in the middle of something',
+                story_pt: `
+                    <h4>Ligação Inoportuna 📞</h4>
+                    <p>Pedro estava concentrado, tentando resolver um problema complexo no computador, quando seu telefone tocou. Era sua mãe, querendo conversar sobre o jantar.</p>
+                    <p>Ele atendeu, mas com a voz um pouco apressada, disse: <span class="expression-highlight">"Mãe, estou ocupado (ou seja também possível dizer - no meio de algo importante agora, posso te ligar de volta em dez minutos?"</span></p>
+                    <p>Sua mãe, compreensiva, respondeu: "Claro, querido. Te espero."</p>
+                `,
+                story_en: `
+                    <h4>Ill-Timed Call 📞</h4>
+                    <p>Pedro was focused, trying to solve a complex computer problem, when his phone rang. It was his mother, wanting to talk about dinner.</p>
+                    <p>He answered, but with a slightly hurried voice, said: <span class="expression-highlight">"Mom, I'm in the middle of something important right now, can I call you back in ten minutes?"</span></p>
+                    <p>His mother, understanding, replied: "Of course, dear. I'll wait."</p>
+                `,
+                english_situation: `
+                    <p>You are busy with a task or activity and someone interrupts you. Never say to someone that I am busy as it is considered impolite or refusing to help.  You want to politely tell them you're occupied and can't give them your full attention at that moment. ⏸️</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu colega de trabalho te chama para uma conversa informal, mas você está terminando um relatório urgente.</p>
+                        <p>Como você o dispensaria educadamente?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I am busy."', isCorrect: false },
+                        { text: 'B) "I\'m in the middle of something."', isCorrect: true },
+                        { text: 'C) "Don\'t bother me now."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I'm in the middle of something" é uma forma educada e comum de dizer que você está ocupado com uma tarefa e não pode ser interrompido no momento, sem ser rude. 🚧</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-5',
+                tabTitle: 'Situation 5 ⏳',
+                expression: 'It\'s quite late',
+                story_pt: `
+                    <h4>A Despedida do Jantar 🍽️</h4>
+                    <p>Depois de um jantar agradável na casa de amigos, Mariana e Fernando olharam para o relógio. Já passava da meia-noite.</p>
+                    <p>Fernando, bocejando, disse: <span class="expression-highlight">"Já está bem tarde, acho melhor irmos."</span></p>
+                    <p>Mariana concordou: "Sim, amanhã temos que acordar cedo."</p>
+                `,
+                story_en: `
+                    <h4>Dinner Farewell 🍽️</h4>
+                    <p>After a pleasant dinner at a friend's house, Mariana and Fernando looked at the clock. It was already past midnight.</p>
+                    <p>Fernando, yawning, said: <span class="expression-highlight">"It's quite late, I think we should go."</span></p>
+                    <p>Mariana agreed: "Yes, we have to wake up early tomorrow."</p>
+                `,
+                english_situation: `
+                    <p>You want to politely suggest that it's time to leave or conclude an activity because the hour is advanced. The word "quite" here intensifies "late," meaning "fairly" or "rather" late, not necessarily "a little" late. It emphasizes the lateness. 🌙</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você está em uma festa e percebe que já são 2 da manhã. Você quer ir embora.</p>
+                        <p>Como você diria para seu amigo que está na hora de ir?</p>
+                    `,
+                    options: [
+                        { text: 'A) "It is a little late."', isCorrect: false },
+                        { text: 'B) "It\'s quite late."', isCorrect: true },
+                        { text: 'C) "We must go now."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "It's quite late" é a forma mais natural e educada de indicar que a hora está avançada e é hora de partir. "Quite" aqui significa "bastante" ou "muito", não "um pouco". 🕰️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-6',
+                tabTitle: 'Situation 6 🥐',
+                expression: 'Would you like something else? No, I\'m good',
+                story_pt: `
+                    <h4>Na Padaria do Seu Jorge 🥖</h4>
+                    <p>Dona Clara estava na padaria do Seu Jorge, comprando pães frescos. Depois de pegar o que precisava, Seu Jorge, com um sorriso, perguntou:</p>
+                    <p><span class="expression-highlight">"ALGO MAIS? (= A senhora gostaria de mais alguma coisa?)"</span></p>
+                    <p>Dona Clara, satisfeita com suas compras, respondeu: <span class="expression-highlight">"Não, estou bem, obrigada!"</span></p>
+                `,
+                story_en: `
+                    <h4>At Seu Jorge's Bakery 🥖</h4>
+                    <p>Dona Clara was at Seu Jorge's bakery, buying fresh bread. After getting what she needed, Seu Jorge, with a smile, asked:</p>
+                    <p><span class="expression-highlight">"Anything else?"" or ask "Would you like something else?"</span></p>
+                    <p>Dona Clara, satisfied with her purchases, replied: <span class="expression-highlight">"No, I'm good, thank you!"</span></p>
+                `,
+                english_situation: `
+                    <p>You are at a store, restaurant, or service counter, and the attendant asks if you need anything further. You are finished and politely decline. 👍</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>O garçom pergunta: "Can I get you anything else?" Você não quer mais nada.</p>
+                        <p>Como você responderia educadamente?</p>
+                    `,
+                    options: [
+                        { text: 'A) "No, I don\'t want."', isCorrect: false },
+                        { text: 'B) "No, I\'m good."', isCorrect: true },
+                        { text: 'C) "I am fine."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "No, I'm good" é a forma mais natural e comum de recusar uma oferta educadamente, indicando que você está satisfeito com o que tem. "I am fine" também é aceitável, mas "I'm good" é mais coloquial e comum. 😌</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-7',
+                tabTitle: 'Situation 7 🌴',
+                expression: 'I am on leave',
+                story_pt: `
+                    <h4>Férias na Praia 🏖️</h4>
+                    <p>No trabalho, um colega ligou para Ana para perguntar sobre um documento urgente. A secretária atendeu e explicou a situação.</p>
+                    <p>Ela disse: <span class="expression-highlight">"A Ana não está no escritório esta semana, ela está de licença ou ela está em férias."</span></p>
+                    <p>O colega entendeu e disse que ligaria na semana seguinte.</p>
+                `,
+                story_en: `
+                    <h4>Beach Vacation 🏖️</h4>
+                    <p>At work, a colleague called Ana to ask about an urgent document. The secretary answered and explained the situation.</p>
+                    <p>She said: <span class="expression-highlight">"Ana is away (= is not in the office) this week, she is on leave."</span></p>
+                    <p>The colleague understood and said he would call next week.</p>
+                `,
+                english_situation: `
+                    <p>You are away from work or duties for an extended period (vacation, sick leave, maternity leave, etc.) and need to inform someone about your absence. 🗓️</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu chefe pergunta por que você não estará no escritório na próxima semana.</p>
+                        <p>Como você diria que estará de férias?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I am on vacation."', isCorrect: false },
+                        { text: 'B) "I am on leave."', isCorrect: true },
+                        { text: 'C) "I will not be working."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I am on leave" é uma expressão formal e abrangente para indicar que você está ausente do trabalho por um período autorizado, seja por férias, doença ou outros motivos. "On vacation" é mais específico para férias. ✈️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-8',
+                tabTitle: 'Situation 8 🏃‍♀️',
+                expression: 'Sorry I am late',
+                story_pt: `
+                    <h4>Chegando Atrasado na Reunião 😬</h4>
+                    <p>A reunião já havia começado quando Marcos finalmente conseguiu chegar. Ele abriu a porta da sala, um pouco ofegante, e se desculpou com os presentes.</p>
+                    <p>Com um sorriso amarelo, ele disse: <span class="expression-highlight">"Desculpe o atraso, o trânsito estava impossível!"</span></p>
+                    <p>O chefe apenas assentiu e indicou uma cadeira vazia.</p>
+                `,
+                story_en: `
+                    <h4>Arriving Late to the Meeting 😬</h4>
+                    <p>The meeting had already started when Marcos finally managed to arrive. He opened the room door, slightly out of breath, and apologized to those present.</p>
+                    <p>With a sheepish smile, he said: <span class="expression-highlight">"Sorry I am late, the traffic was impossible!"</span></p>
+                    <p>The boss just nodded and pointed to an empty chair.</p>
+                `,
+                english_situation: `
+                    <p>You arrive after the scheduled time for an appointment, meeting, or social gathering and need to apologize for your tardiness. ⏰</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você chega 15 minutos atrasado para um encontro com amigos.</p>
+                        <p>Qual a melhor forma de se desculpar?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I am late, sorry."', isCorrect: false },
+                        { text: 'B) "Sorry I am late."', isCorrect: true },
+                        { text: 'C) "My apologies for being late."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Sorry I am late" é a forma mais direta, comum e natural de se desculpar por um atraso em contextos informais e semi-formais. "My apologies for being late" é mais formal. 🚶‍♂️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-9',
+                tabTitle: 'Situation 9 🩺',
+                expression: 'I will see the doctor tomorrow',
+                story_pt: `
+                    <h4>Dor de Cabeça Persistente 🤕</h4>
+                    <p>Carla estava com uma dor de cabeça que não passava há dois dias. Sua amiga, preocupada, perguntou se ela já havia procurado ajuda.</p>
+                    <p>Carla, com a voz um pouco fraca, respondeu: <span class="expression-highlight">"Sim, eu vou ao médico ou tenho consulta médico amanhã, já marquei."</span></p>
+                    <p>A amiga aliviada disse: "Que bom, não demore para se cuidar!"</p>
+                `,
+                story_en: `
+                    <h4>Persistent Headache 🤕</h4>
+                    <p>Carla had a headache that hadn't gone away for two days. Her friend, worried, asked if she had already sought help.</p>
+                    <p>Carla, with a slightly weak voice, replied: <span class="expression-highlight">"Yes, I will see the doctor tomorrow, I've already booked it."</span></p>
+                    <p>Her relieved friend said: "That's good, don't delay taking care of yourself!"</p>
+                `,
+                english_situation: `
+                    <p>You have a health concern and have made plans to consult a medical professional on the following day. You are informing someone of this plan. 🏥</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você está se sentindo mal e sua mãe pergunta o que você fará.</p>
+                        <p>Como você diria que irá ao médico amanhã?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I go to the doctor tomorrow."', isCorrect: false },
+                        { text: 'B) "I will see the doctor tomorrow."', isCorrect: true },
+                        { text: 'C) "I will visit the doctor tomorrow."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I will see the doctor tomorrow" é a forma mais comum e natural de dizer que você tem uma consulta médica agendada. "Visit" também é possível, mas "see" é mais frequente para consultas. 🧑‍⚕️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-10',
+                tabTitle: 'Situation 10 🍞',
+                expression: 'I will have 5 bread rolls',
+                story_pt: `
+                    <h4>Na Padaria para o Café da Manhã ☕</h4>
+                    <p>João entrou na padaria para comprar o café da manhã para a família. Chegando ao balcão, a atendente perguntou o que ele gostaria.</p>
+                    <p>Ele disse: <span class="expression-highlight">"Eu vou querer cinco pães, por favor."</span></p>
+                    <p>A atendente pegou os pães frescos e colocou na sacola.</p>
+                `,
+                story_en: `
+                    <h4>At the Bakery for Breakfast ☕</h4>
+                    <p>João entered the bakery to buy breakfast for his family. Arriving at the counter, the attendant asked what he would like.</p>
+                    <p>He said: <span class="expression-highlight">"I will have 5 bread rolls, please."</span></p>
+                    <p>The attendant took the fresh bread rolls and put them in the bag.</p>
+                `,
+                english_situation: `
+                    <p>You are at a bakery or restaurant and are ordering a specific quantity of individual bread items. In English, "bread" is generally uncountable, but for individual items, we use terms like "rolls," "loaves," or "slices." 🥖</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você está em uma padaria e quer pedir 3 pães franceses.</p>
+                        <p>Como você faria o pedido?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I want 3 breads."', isCorrect: false },
+                        { text: 'B) "I will have 3 bread rolls."', isCorrect: true },
+                        { text: 'C) "Give me 3 breads, please."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I will have 3 bread rolls" é a forma correta e natural de pedir pães individuais em inglês. "Bread" é incontável, então usamos "bread rolls" para o plural de pães pequenos. 🥐</p>
+                    `
+                }
+            }
+        ];
+
+        let currentLessonIndex = -1;
+        let activeTabElement = null;
+
+        function renderLesson(lessonIndex) {
+            const lesson = lessons[lessonIndex];
+            const lessonContentDiv = document.getElementById('lesson-content');
+            const lessonTitleH2 = document.getElementById('lesson-title');
+
+            lessonTitleH2.innerHTML = `🔹 ${lesson.tabTitle} — <span style="color: var(--accent-yello);">${lesson.expression}</span>`;
+            lessonContentDiv.innerHTML = ''; // Clear previous content
+
+            // Story in Portuguese
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">História em Português 🇧🇷</h3>
+                <div class="story-section">
+                    ${lesson.story_pt}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Story in English
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">Story in English 🇺🇸🇬🇧</h3>
+                <div class="story-section">
+                    ${lesson.story_en}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Real-feeling English Situation
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">Real-Feeling English Situation 💡</h3>
+                <div class="story-section">
+                    ${lesson.english_situation}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Quick Exercise
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-yello); text-shadow: 0 0 8px rgba(255,226,95,0.5);">Quick Exercise ✅</h3>
+                <div class="exercise-section">
+                    ${lesson.exercise.question}
+                    <div class="options" id="exercise-options-${lessonIndex}">
+                        ${lesson.exercise.options.map((option, idx) => `
+                            <label>
+                                <input type="radio" name="exercise-q-${lessonIndex}" value="${idx}" data-correct="${option.isCorrect}">
+                                ${option.text}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button onclick="checkExerciseAnswer(${lessonIndex})">CHECK ANSWER</button>
+                    <div class="explanation" id="exercise-explanation-${lessonIndex}" style="display: none;">
+                        ${lesson.exercise.explanation}
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkExerciseAnswer(lessonIndex) {
+            const optionsDiv = document.getElementById(`exercise-options-${lessonIndex}`);
+            const explanationDiv = document.getElementById(`exercise-explanation-${lessonIndex}`);
+            const radios = optionsDiv.querySelectorAll('input[type="radio"]');
+            let selectedCorrect = false;
+
+            radios.forEach(radio => {
+                const label = radio.closest('label');
+                label.classList.remove('correct', 'incorrect');
+                if (radio.checked) {
+                    if (radio.dataset.correct === 'true') {
+                        label.classList.add('correct');
+                        selectedCorrect = true;
+                    } else {
+                        label.classList.add('incorrect');
+                    }
+                }
+            });
+
+            explanationDiv.style.display = 'block';
+
+            if (selectedCorrect && currentLessonIndex !== -1) {
+                const tabElement = document.querySelector(`.tab-item[data-lesson-id="${lessons[currentLessonIndex].id}"]`);
+                if (tabElement && !tabElement.classList.contains('completed')) {
+                    tabElement.classList.add('completed');
+                }
+            }
+        }
+
+        function setActiveTab(tabElement, lessonIndex) {
+            if (activeTabElement) {
+                activeTabElement.classList.remove('active');
+            }
+            tabElement.classList.add('active');
+            activeTabElement = tabElement;
+            currentLessonIndex = lessonIndex;
+            renderLesson(lessonIndex);
+        }
+
+        // Initialize tabs
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabNavigation = document.getElementById('tab-navigation');
+            lessons.forEach((lesson, index) => {
+                const tabItem = document.createElement('div');
+                tabItem.classList.add('tab-item');
+                tabItem.textContent = lesson.tabTitle;
+                tabItem.dataset.lessonId = lesson.id;
+                tabItem.addEventListener('click', () => setActiveTab(tabItem, index));
+                tabNavigation.appendChild(tabItem);
+            });
+
+            // Set initial active tab (Situation 1)
+            if (lessons.length > 0) {
+                const firstTab = tabNavigation.querySelector('.tab-item');
+                if (firstTab) {
+                    setActiveTab(firstTab, 0);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
